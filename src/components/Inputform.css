@@ -1,0 +1,19 @@
+
+.FormArea{
+    width: 60vh;
+    height: 60vh;
+    border: 1px solid blueviolet;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center ;
+    border-radius: 10%;
+}
+.Form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center ;
+    gap: 12px;
+}
+
