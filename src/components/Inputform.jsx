@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import './Inputform.css'
 function Inputform() {
-  const [password, setPassword] = useState(null);
+  const [password, setPassword] = useState("");
   const [strong, setStrong] = useState(null);
-  const [isChecked , setIschecked] = useState(false) ; 
   const redColor = {
     color:"red" ,
   }
   function validatePassword(password) {
    // setPassword(e.target.value) ; 
-   // console.log("input password", password, typeof password);
+    console.log("input password : ", password);
     let isChar = false;
     let isNum = false;
     let isSpecialChar = false;
@@ -35,16 +34,10 @@ function Inputform() {
      }
   }
 
-  function hanleOnclick(e) {
-    e.preventDefault();
-    validatePassword(password);
-    setIschecked(true) ; 
-  }
 
   function changePasswordHandler (e) {
-    setPassword(e.target.value) ; 
-    if(!password) 
-      setIschecked(false) ; 
+    setPassword( e.target.value ) ;  
+    validatePassword(password);
   }
 
   return (
@@ -55,22 +48,20 @@ function Inputform() {
         </label>
         <input type="text" onChange={changePasswordHandler} />
         {/* <input type="text" onChange={handleInput} /> */}
-
-        <button type="submit" onClick={hanleOnclick}>
-          Check
-        </button>
+        {strong && password &&   (
+          <div className="validateMessage">
+            <p>Password is strong {password}</p>
+          </div>
+        )}
+        {!strong && password && (
+          <div className="validateMessage" >
+            <p style={redColor}>Password is not strong : {password}</p>
+          </div>
+        )}
+  
       </form>
 
-      {strong && password && isChecked &&  (
-        <div className="validateMessage">
-          <p>Password is strong {password}</p>
-        </div>
-      )}
-      {!strong && isChecked && password && (
-        <div className="validateMessage" >
-          <p style={redColor}>Password is not strong : {password}</p>
-        </div>
-      )}
+      
     </div>
   );
 }
