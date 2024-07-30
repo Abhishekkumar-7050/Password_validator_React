@@ -4,10 +4,12 @@ function Inputform() {
   const [password, setPassword] = useState(null);
   const [strong, setStrong] = useState(null);
   const [isChecked , setIschecked] = useState(false) ; 
-  
+  const redColor = {
+    color:"red" ,
+  }
   function validatePassword(password) {
    // setPassword(e.target.value) ; 
-    console.log("input password", password, typeof password);
+   // console.log("input password", password, typeof password);
     let isChar = false;
     let isNum = false;
     let isSpecialChar = false;
@@ -39,13 +41,19 @@ function Inputform() {
     setIschecked(true) ; 
   }
 
+  function changePasswordHandler (e) {
+    setPassword(e.target.value) ; 
+    if(!password) 
+      setIschecked(false) ; 
+  }
+
   return (
-    <div className="FormArea">
+    <div className="FormArea" >
       <form className="Form" action="">
         <label placeholder=" Password" htmlFor="">
           Enter your Password
         </label>
-        <input type="text" onChange={e => setPassword(e.target.value)} />
+        <input type="text" onChange={changePasswordHandler} />
         {/* <input type="text" onChange={handleInput} /> */}
 
         <button type="submit" onClick={hanleOnclick}>
@@ -53,15 +61,14 @@ function Inputform() {
         </button>
       </form>
 
-      {strong && password && (
+      {strong && password && isChecked &&  (
         <div className="validateMessage">
           <p>Password is strong {password}</p>
-          
         </div>
       )}
       {!strong && isChecked && password && (
-        <div className="validateMessage">
-          <p>Password is not strong {password}</p>
+        <div className="validateMessage" >
+          <p style={redColor}>Password is not strong : {password}</p>
         </div>
       )}
     </div>
