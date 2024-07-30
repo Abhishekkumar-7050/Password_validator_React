@@ -16,4 +16,8 @@
     align-items: center ;
     gap: 12px;
 }
+input{
+    padding: 5px;
+    font-size: 1.4rem;
+}
 
